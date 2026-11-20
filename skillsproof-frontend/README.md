@@ -64,3 +64,15 @@ Replace `YOUR_USERNAME` with your GitHub username. Git will prompt you to authen
 ## Design
 
 Inspired by the user's supplied Class Management layout, with a deep-teal sidebar, mint-blue dashboard cards, and a separate dark SQL editor. No source artwork was reused.
+
+## Voice-only interview (frontend prototype)
+
+The interview uses the browser MediaRecorder API and requires microphone permission, a supported browser, and a secure origin (`localhost` works for local development). Two recorded answers are required before demo submission. Audio is stored as in-memory Blob objects and playable through local object URLs; there is no upload, AI transcription, persistence, or security enforcement yet. Candidates cannot type or paste into interview-answer fields. Production must implement server-side audio upload, authentication, validation, retention/consent controls, and assessor access. Voice-only submission cannot guarantee that an answer was not read from an external source.
+
+## Difficulty levels and timed interviews (prototype)
+
+The assessment catalogue now lets the candidate select **Easy (60 seconds)**, **Intermediate (90 seconds)** or **Advanced (120 seconds)**. Each level provides three SQL challenges and two level-appropriate voice interview questions. The level is locked once an assessment starts and can be changed by resetting the demonstration.
+
+Each voice question has a visible countdown. Recording begins on microphone activation, stops automatically when time expires, and is limited to one captured answer. The next interview question unlocks after the previous recording is completed. Typing interview answers is not supported. Audio remains in browser memory only; no automatic grading, upload, speech transcription or server-side time enforcement is implemented yet.
+
+These time limits are **provisional UX settings** and should be tested for usability, accessibility and fairness with participants before production. In production, the FastAPI backend must enforce attempts, deadlines and permissions rather than trusting browser state.
